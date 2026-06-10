@@ -1,0 +1,8 @@
+[
+    {"id": 1001, "name": "Dell Vostro 3520 (partner stock)", "brand_name": "Dell", "price": 8500},
+    {"id": 1002, "name": "Dell Precision 7780 (partner stock)", "brand_name": "Dell", "price": 480000},
+    {"id": 1003, "name": "Lenovo V15 (partner stock)", "brand_name": "Lenovo", "price": 9900},
+    {"id": 1004, "name": "Lenovo ThinkStation P3 (partner stock)", "brand_name": "Lenovo", "price": 520000},
+    {"id": 1005, "name": "HP ProBook 450 (partner stock)", "brand_name": "HP", "price": 12000},
+    {"id": 1006, "name": "Apple Mac Studio (partner stock)", "brand_name": "Apple", "price": 610000}
+]

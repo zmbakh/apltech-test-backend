@@ -16,6 +16,18 @@ $config = [
                 'viewPath' => '@app/mail',
             ],
         ],
+        'definitions' => [
+            \app\services\Auth\IssueJwtTokenService::class => static fn() => new \app\services\Auth\IssueJwtTokenService(
+                \Yii::$app->params['jwtSecret'],
+            ),
+            \app\services\Auth\ExtractJwtUserService::class => static fn() => new \app\services\Auth\ExtractJwtUserService(
+                \Yii::$app->params['jwtSecret'],
+            ),
+            \app\services\Product\BrandPriceService\BrandPriceService::class => static fn() => new \app\services\Product\BrandPriceService\BrandPriceService(
+                new \app\services\Product\BrandPriceService\DbProductSource(),
+                new \app\services\Product\BrandPriceService\JsonApiProductSource(\Yii::$app->params['externalProductsUrl']),
+            ),
+        ],
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -25,13 +37,18 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'ftL3lR8Mb4LLOG2I9wmaJtf8v-x95fyJ',
+            'parsers' => [
+                'application/json' => \yii\web\JsonParser::class,
+            ],
         ],
         'cache' => [
             'class' => \yii\caching\FileCache::class,
         ],
         'user' => [
             'identityClass' => \app\models\User::class,
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
+            'enableSession' => false,
+            'loginUrl' => null,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -51,6 +68,12 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'POST api/auth/login' => 'auth/login',
+                'GET api/products' => 'product/index',
+                'GET api/product/brand/<name:[^\/]+>' => 'product/brand',
+                'GET api/product/<id:\d+>' => 'product/view',
+                'POST api/product/create' => 'product/create',
+                'PATCH api/product/update/<id:\d+>' => 'product/update',
             ],
         ],
     ],

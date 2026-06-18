@@ -68,6 +68,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                ['pattern' => 'api/<path:.*>', 'route' => 'auth/preflight', 'verb' => ['OPTIONS']],
                 'POST api/auth/login' => 'auth/login',
                 'GET api/products' => 'product/index',
                 'GET api/product/brand/<name:[^\/]+>' => 'product/brand',

@@ -27,4 +27,6 @@ abstract class BaseApiController extends Controller
 
         return $behaviors;
     }
+
+    public function actionPreflight(): void {}
 }

@@ -4,10 +4,9 @@ namespace app\controllers;
 
 use app\models\User;
 use app\services\Auth\IssueJwtTokenService;
-use yii\rest\Controller;
 use yii\web\UnauthorizedHttpException;
 
-final class AuthController extends Controller
+final class AuthController extends BaseApiController
 {
     public function __construct(
         $id,

@@ -9,11 +9,9 @@ use app\services\Product\BrandPriceService\BrandPriceService;
 use app\services\Product\ProductCreateService;
 use app\services\Product\ProductUpdateService;
 use yii\filters\auth\HttpBearerAuth;
-use yii\filters\Cors;
-use yii\rest\Controller;
 use yii\web\NotFoundHttpException;
 
-final class ProductController extends Controller
+final class ProductController extends BaseApiController
 {
     public function __construct(
         $id,
@@ -29,15 +27,6 @@ final class ProductController extends Controller
     public function behaviors(): array
     {
         $behaviors = parent::behaviors();
-
-        $behaviors['corsFilter'] = [
-            'class' => Cors::class,
-            'cors' => [
-                'Origin' => ['http://localhost:5173'],
-                'Access-Control-Request-Method' => ['GET', 'POST', 'PATCH', 'OPTIONS'],
-                'Access-Control-Request-Headers' => ['*'],
-            ],
-        ];
 
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::class,
